@@ -1,9 +1,12 @@
 package com.example.spring_lesson.service.impl;
 
 import com.example.spring_lesson.configuration.WeatherConfiguration;
+import com.example.spring_lesson.dto.CityDto;
+import com.example.spring_lesson.dto.WeatherStateDto;
 import com.example.spring_lesson.entity.WeatherJson;
 import com.example.spring_lesson.entity.weather.WeatherInfo;
 import com.example.spring_lesson.service.WeatherReceiveService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -16,10 +19,14 @@ public class WeatherReceiveServiceImpl implements WeatherReceiveService {
 
     private final WeatherConfiguration configuration;
     private final RestTemplate restTemplate;
+    private final CityServiceImpl cityService;
+    private final WeatherStateServiceImpl weatherStateService;
 
-    public WeatherReceiveServiceImpl(WeatherConfiguration configuration, RestTemplateBuilder restTemplateBuilder) {
+    public WeatherReceiveServiceImpl(WeatherConfiguration configuration, RestTemplateBuilder restTemplateBuilder, CityServiceImpl cityService, WeatherStateServiceImpl weatherStateService) {
         this.configuration = configuration;
         this.restTemplate = restTemplateBuilder.build();
+        this.cityService = cityService;
+        this.weatherStateService = weatherStateService;
     }
 
     private String formatJson(WeatherJson weatherJson){
@@ -43,6 +50,16 @@ public class WeatherReceiveServiceImpl implements WeatherReceiveService {
                 .build()
                 .encode()
                 .toUri();
-        return formatJson(restTemplate.getForObject(targetUrl, WeatherJson.class));
+        CityDto cityDto = new CityDto();
+        WeatherJson weatherJson = restTemplate.getForObject(targetUrl, WeatherJson.class);
+        WeatherStateDto weatherStateDto = new WeatherStateDto();
+        cityDto.setName(city);
+        cityService.save(cityDto);
+        weatherStateDto.setCityId(cityService.findByName(city).getId());
+        for (WeatherInfo weatherInfo : weatherJson.getWeatherInfos())
+            weatherStateDto.getCondition().add(weatherInfo.getCode());
+        weatherStateDto.setTemperature(weatherJson.getMainWeatherData().getTemp());
+        weatherStateService.save(weatherStateDto);
+        return formatJson(weatherJson);
     }
 }
