@@ -16,8 +16,8 @@ public class CityServiceImpl implements CityService {
     private final CityRepository cityRepository;
 
     @Override
-    public Optional<City> findById(Long id) {
-        return cityRepository.findById(id);
+    public City findById(Long id) {
+        return cityRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -27,9 +27,11 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public void save(CityDto cityDto) {
-        City city = new City();
-        city.setName(cityDto.getName());
-        cityRepository.save(city);
+        if(cityRepository.findByName(cityDto.getName()) == null) {
+            City city = new City();
+            city.setName(cityDto.getName());
+            cityRepository.save(city);
+        }
     }
 
     @Override

@@ -14,7 +14,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 class WeatherStateServiceImpl  implements WeatherStateService {
 
-    private WeatherStateRepository weatherStateRepository;
+    private final WeatherStateRepository weatherStateRepository;
 
     @Override
     public Optional<WeatherState> findById(Long id) {
@@ -28,6 +28,7 @@ class WeatherStateServiceImpl  implements WeatherStateService {
         weatherState.setCondition(weatherStateDto.getCondition());
         weatherState.setRequestTime(weatherStateDto.getRequestTime());
         weatherState.setTemperature(weatherStateDto.getTemperature());
+        weatherState.setRequestTime(new java.util.Date());
         weatherStateRepository.save(weatherState);
     }
 

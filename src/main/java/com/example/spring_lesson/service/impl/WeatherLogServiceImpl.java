@@ -26,10 +26,11 @@ public class WeatherLogServiceImpl implements WeatherLogService {
         {
             for (Integer code : state.getCondition())
             {
+                code = code / 100  * 100;
                 WeatherConditions conditionEntity = weatherConditionService.getByCode(code);
-                String description = String.format("в %s чесов %s %s градусов", state.getRequestTime(),
+                String description = String.format("в %s часов %s %s градусов", state.getRequestTime(),
                         conditionEntity.getValue(), state.getTemperature());
-                res += description;
+                res += (description + "\\n") ;
             }
         }
         return res;

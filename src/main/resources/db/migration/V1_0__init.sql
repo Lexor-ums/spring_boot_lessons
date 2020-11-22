@@ -1,14 +1,14 @@
 
 CREATE TABLE IF NOT EXISTS cities
 (
-    id            serial PRIMARY KEY,
-    name          varchar(255) NOT NULL
+    id            BIGSERIAL PRIMARY KEY,
+    name          varchar(255) NOT NULL unique
 );
 
 CREATE TABLE IF NOT EXISTS weather_state
 (
-    id              serial PRIMARY KEY,
-    city_id         int8,
+    id              BIGSERIAL PRIMARY KEY,
+    city_id         bigint,
     condition       integer ARRAY,
     request_time    date,
     temperature     float8,
@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS weather_state
 
 CREATE TABLE IF NOT EXISTS conditions_codes
 (
-    id         serial PRIMARY KEY,
-    code       int8,
+    id         BIGSERIAL PRIMARY KEY,
+    code       int4,
     value      text
 );

@@ -11,5 +11,5 @@ import java.util.List;
 @Repository
 public interface WeatherStateRepository extends JpaRepository<WeatherState, Long> {
     @Query("select b from WeatherState b where b.cityId = :cityId")
-    List<WeatherState> findByCityId(@Param("city_id") Long cityId);
+    List<WeatherState> findByCityId(@Param("cityId") Long cityId);
 }

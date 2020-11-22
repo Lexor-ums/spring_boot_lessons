@@ -13,9 +13,10 @@ public class WeatherInfo {
     @JsonProperty("description")
     String description;
 
-    @Column(name = "code")
-    private Integer code;
+    @Column(name = "id")
+    private Integer id;
 
-    @Column(name = "value")
-    private String value;
+    @Column(name = "main")
+    private String main;
+
 }

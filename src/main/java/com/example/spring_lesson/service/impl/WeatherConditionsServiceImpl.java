@@ -13,7 +13,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class WeatherConditionsServiceImpl implements WeatherConditionsService {
 
-    private WeatherConditionsRepository weatherConditionsRepository;
+    private final WeatherConditionsRepository weatherConditionsRepository;
 
     @Override
     public Optional<WeatherConditions> findById(Long id) {

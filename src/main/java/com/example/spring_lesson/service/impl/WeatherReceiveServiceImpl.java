@@ -57,7 +57,7 @@ public class WeatherReceiveServiceImpl implements WeatherReceiveService {
         cityService.save(cityDto);
         weatherStateDto.setCityId(cityService.findByName(city).getId());
         for (WeatherInfo weatherInfo : weatherJson.getWeatherInfos())
-            weatherStateDto.getCondition().add(weatherInfo.getCode());
+            weatherStateDto.addCondition(weatherInfo.getId());
         weatherStateDto.setTemperature(weatherJson.getMainWeatherData().getTemp());
         weatherStateService.save(weatherStateDto);
         return formatJson(weatherJson);
