@@ -20,7 +20,7 @@ public class WeatherLogController {
         return new ResponseEntity<>("Добавьце в адресную строку название города. Можно кирилицей", HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAnyAuthority('weather:log')")
+    @PreAuthorize("hasAnyAuthority('log_perm')")
     @GetMapping("/weather_log/{city}")
     public ResponseEntity<String> showWeather(@PathVariable(name = "city") String city)  {
         return new ResponseEntity<>(weatherLogServiceImpl.getLog(city), HttpStatus.OK);

@@ -1,16 +1,25 @@
 package com.example.spring_lesson.model;
 
-public enum Permission {
-    WEATHER_GET("weather:get"),
-    WEATHER_LOG("weather:log");
+import lombok.Data;
 
-    private String permission;
+import javax.persistence.*;
+import java.util.Set;
 
-    Permission(String permission) {
-        this.permission = permission;
-    }
+@Entity
+@Data
+@Table(name = "permission")
+public class Permission {
 
-    public String getPermission() {
-        return permission;
-    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "name")
+    private String name;
+
+//    @ManyToMany
+//    private Set<Role> roles;
+
+
 }
+

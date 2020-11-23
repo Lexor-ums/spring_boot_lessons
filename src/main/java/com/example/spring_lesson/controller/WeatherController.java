@@ -21,7 +21,7 @@ public class WeatherController {
         return new ResponseEntity<>("Добавьце в адресную строку название города. Можно кирилицей", HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAnyAuthority('weather:get')")
+    @PreAuthorize("hasAnyAuthority('request_perm')")
     @GetMapping("/today_weather/{city}")
     public ResponseEntity<String> showWeather(@PathVariable(name = "city") String city)  {
         return new ResponseEntity<>(weatherReceiveService.getWeather(city), HttpStatus.OK);
