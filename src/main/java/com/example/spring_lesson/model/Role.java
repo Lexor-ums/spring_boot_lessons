@@ -21,14 +21,10 @@ public class Role {
     private String name;
 
     @ManyToMany
-    private Set<Actor> actors;
-
-    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "role_rermission",
-            joinColumns = @JoinColumn(name = "permission_id")
-            //            ,
-//            inverseJoinColumns = @JoinColumn(name = "role_id")
+            name="role_rermission",
+            joinColumns=@JoinColumn(name="role_id", referencedColumnName="id"),
+            inverseJoinColumns=@JoinColumn(name="permission_id", referencedColumnName="id")
     )
     private Set<Permission> permissions;
 

@@ -35,8 +35,8 @@ CREATE TABLE IF NOT EXISTS role_rermission
     FOREIGN KEY (permission_id) REFERENCES permission(id)
 );
 
-insert into actor (login, password)values ('admin', 'MQ==');
-insert into actor (login, password)values ('guest', 'Mg==');
+insert into actor (login, password)values ('admin', '$2y$12$eLLIy5F7rlRpOz7pYzGmjuiyV/nVQwZ7BHOeB1xpswVlRILI.hud2');
+insert into actor (login, password)values ('guest', '$2y$12$rUfkAzUhPm9jIBVFdGG6H..hCG7dI4BS7ASfDl5Ojv8kq8JzS2rui');
 
 insert into role (name)values ('admin');
 insert into role (name)values ('guest');
@@ -49,4 +49,4 @@ insert into actor_role (actor_id, role_id) values (2, 2);
 
 insert into role_rermission (role_id, permission_id) values (1, 1);
 insert into role_rermission (role_id, permission_id) values (1, 2);
-insert into role_rermission (role_id, permission_id) values (2, 2);
+insert into role_rermission (role_id, permission_id) values (2, 1);

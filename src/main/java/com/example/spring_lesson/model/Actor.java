@@ -21,9 +21,11 @@ public class Actor {
     @Column(name = "password")
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "actor_role",
-            joinColumns = @JoinColumn(name = "actor_id")
+    @ManyToMany
+    @JoinTable(
+            name="actor_role",
+            joinColumns=@JoinColumn(name="actor_id", referencedColumnName="id"),
+            inverseJoinColumns=@JoinColumn(name="role_id", referencedColumnName="id")
     )
     private Set<Role> roles;
 

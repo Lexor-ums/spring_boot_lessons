@@ -19,6 +19,8 @@ public class WeatherLogServiceImpl implements WeatherLogService {
     @Override
     public String getLog(String cityName) {
         City city = cityService.findByName(cityName);
+        if (city == null)
+            return "Нет данных";
         List<WeatherState> states = weatherStateService.getByCityId(city.getId());
         String todayWeather = "Сегодня в городе %s :";
         String res = String.format(todayWeather, city.getName());
