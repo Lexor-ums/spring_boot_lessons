@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ActorServiceImpl implements ActorService {
 
-    ActorRepository actorRepository;
+    private final ActorRepository actorRepository;
 
     @Override
     public Actor findByLogin(String name) {

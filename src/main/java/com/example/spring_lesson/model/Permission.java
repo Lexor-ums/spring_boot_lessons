@@ -3,7 +3,6 @@ package com.example.spring_lesson.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Data
@@ -16,10 +15,5 @@ public class Permission {
 
     @Column(name = "name")
     private String name;
-
-//    @ManyToMany
-//    private Set<Role> roles;
-
-
 }
 
