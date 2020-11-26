@@ -1,7 +1,6 @@
 package com.example.spring_lesson.configuration;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.ConstructorBinding;
 import org.springframework.context.annotation.Configuration;
@@ -11,8 +10,7 @@ import org.springframework.context.annotation.Primary;
 @Primary
 @ConfigurationProperties(prefix = "weather")
 @ConstructorBinding
-@Getter
-@Setter
+@Data
 public class WeatherConfiguration {
 
     private  String url;
