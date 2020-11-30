@@ -1,6 +1,7 @@
 package com.example.spring_lesson.service.impl;
 
 import com.example.spring_lesson.dto.CityDto;
+import com.example.spring_lesson.mapper.CityMapper;
 import com.example.spring_lesson.model.City;
 import com.example.spring_lesson.repository.CityRepository;
 import com.example.spring_lesson.service.CityService;
@@ -15,6 +16,8 @@ public class CityServiceImpl implements CityService {
 
     private final CityRepository cityRepository;
 
+    private final CityMapper cityMapper;
+
     @Override
     public City findById(Long id) {
         return cityRepository.findById(id).orElse(null);
@@ -28,8 +31,7 @@ public class CityServiceImpl implements CityService {
     @Override
     public void save(CityDto cityDto) {
         if(cityRepository.findByName(cityDto.getName()) == null) {
-            City city = new City();
-            city.setName(cityDto.getName());
+            City city = cityMapper.toCity(cityDto);
             cityRepository.save(city);
         }
     }
