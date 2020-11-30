@@ -7,14 +7,15 @@ import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
 @Table(name = "weather_state")
-@TypeDef(
-        name = "list-array",
-        typeClass = ListArrayType.class
-)
+//@TypeDef(
+//        name = "list-array",
+//        typeClass = ListArrayType.class
+//)
 public class WeatherState {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,9 +24,11 @@ public class WeatherState {
     @Column(name = "city_id")
     private Long cityId;
 
-    @Type(type = "list-array")
-    @Column(name = "condition",
-            columnDefinition = "integer[]")
+    @OneToMany
+    @JoinTable(
+            name="weather_state_conditions",
+            joinColumns=@JoinColumn(name="weather_state_id", referencedColumnName="id")
+    )
     private List<Integer> condition;
 
     @Column(name = "request_time")
