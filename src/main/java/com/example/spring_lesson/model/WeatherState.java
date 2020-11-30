@@ -1,27 +1,22 @@
 package com.example.spring_lesson.model;
 
-import com.vladmihalcea.hibernate.type.array.ListArrayType;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Data
 @Table(name = "weather_state")
-//@TypeDef(
-//        name = "list-array",
-//        typeClass = ListArrayType.class
-//)
 public class WeatherState {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(name = "id", example = "1")
     private Long id;
 
     @Column(name = "city_id")
+    @ApiModelProperty(name = "city_id", example = "1")
     private Long cityId;
 
     @OneToMany
@@ -32,8 +27,10 @@ public class WeatherState {
     private List<Integer> condition;
 
     @Column(name = "request_time")
+    @ApiModelProperty(name = "request_time", example = "31-08-2020 10:20:5")
     private java.util.Date requestTime;
 
     @Column(name = "temperature")
+    @ApiModelProperty(name = "temperature", example = "-1.4")
     private Double temperature;
 }

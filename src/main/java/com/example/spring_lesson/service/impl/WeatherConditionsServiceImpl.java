@@ -1,6 +1,7 @@
 package com.example.spring_lesson.service.impl;
 
 import com.example.spring_lesson.dto.WeatherConditionsDto;
+import com.example.spring_lesson.mapper.WeatherConditionsMapper;
 import com.example.spring_lesson.model.WeatherConditions;
 import com.example.spring_lesson.repository.WeatherConditionsRepository;
 import com.example.spring_lesson.service.WeatherConditionsService;
@@ -15,6 +16,8 @@ public class WeatherConditionsServiceImpl implements WeatherConditionsService {
 
     private final WeatherConditionsRepository weatherConditionsRepository;
 
+    private final WeatherConditionsMapper weatherConditionsMapper;
+
     @Override
     public Optional<WeatherConditions> findById(Long id) {
         return weatherConditionsRepository.findById(id);
@@ -22,9 +25,7 @@ public class WeatherConditionsServiceImpl implements WeatherConditionsService {
 
     @Override
     public void save(WeatherConditionsDto weatherConditionsDto) {
-        WeatherConditions weatherConditions = new WeatherConditions();
-        weatherConditions.setCode(weatherConditionsDto.getCode());
-        weatherConditions.setValue(weatherConditionsDto.getValue());
+        WeatherConditions weatherConditions = weatherConditionsMapper.toWeaWeatherConditions(weatherConditionsDto);
         weatherConditionsRepository.save(weatherConditions);
     }
 
